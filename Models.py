@@ -128,25 +128,3 @@ class Match:
 	#une référence à une instance de joueur
 	#un score
 
-"""
-class Matches:#alimenter la liste des matchs ?
-
-    def __init__(self):
-        self.list = []
-
-    def add_match(self, match):
-        self.list.append(match)
-
-    def to_dictionary(self):
-        matches_dict = {
-            "list": []
-        }
-        for match in self.list:
-            matches_dict["list"].append(match.to_dictionary())
-
-        return matches_dict
-
-
-    def current_round(self):#suivi du tour en cours ?
-        return len(self.round_list)
-"""
