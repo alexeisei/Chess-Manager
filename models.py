@@ -63,7 +63,7 @@ class Tournament:
 
     def __str__(self):
         """ display tournament's infos """
-        info = f'name : {self.name} -- location : {self.location} -- rounds  : {self.rounds} -- timer : {self.timer} -- description : {self.description}'
+        info = f'name : {self.name} -- location : {self.location} -- rounds  : {self.rounds_list} -- timer : {self.timer} -- description : {self.description}'
         return info.format(self)
 
     def add_players(self, player):
@@ -111,7 +111,7 @@ class Round:
     It is fed with matches and players' info
     '''
 
-    def __init__(self, round_name, start_date_time, end_date_time, match_list=[]):
+    def __init__(self, round_name, start_date_time, end_date_time, match_list):
         self.round_name = round_name
         self.start_date_time = start_date_time
         self.end_date_time = end_date_time
@@ -162,6 +162,5 @@ class Match:
     def draw_match(self):
         self.score += 0.5
 
-    #def set_winner(self, winner):
-        #self.winner = winner
+
 
