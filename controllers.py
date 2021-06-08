@@ -49,7 +49,7 @@ class PlayerController:
         self.player_view.new_player_rank()
         rank = self.player_view.new_player_rank()
         new_player = Player(name, firstname, birth_date, gender, rank)
-        self.player_table.insert(new_player.serialized_player())
+        self.player_table.insert(new_player.serialize_player())
         self.player_menu()
 
     def edit_player(self):
@@ -60,7 +60,7 @@ class PlayerController:
         try:
             input_rank = int(input())
         except ValueError:
-            self.player_view.error_player_elo()
+            self.player_view.error_player_rank()
         else:
             self.player_table.update(
                 {"Elo": input_rank}, self.playerquery.Last_name == f"{input_player}"
@@ -81,11 +81,11 @@ class PlayerController:
         alpha_order = sorted(players, key=lambda x: x["Last_name"])
         return alpha_order
 
-    def player_classement_order(self):
-        """ List of the player in classement order"""
+    def player_ranking_order(self):
+        """ List of the player in ranking order"""
         players = self.player_table.all()
-        classe_order = sorted(players, key=lambda x: x["Elo"], reverse=True)
-        return classe_order
+        rank_order = sorted(players, key=lambda x: x["Rank"], reverse=True)
+        return rank_order
 
     def search_player(self):
         """ search player"""
@@ -108,9 +108,9 @@ class TournamentController:
     def __init__(self):
         """ constructor of the tournament controller"""
         self.tournament_view = Menu()
-        #self.tournamentdb = TinyDB("tournament.json")
-        #self.tournamentquery = Query()
-        #self.tournament_table = self.tournamentdb.table("tournament")
+        self.tournamentdb = TinyDB("tournament.json")
+        self.tournamentquery = Query()
+        self.tournament_table = self.tournamentdb.table("tournament")
 
     def tournament_menu(self):
         """ start the tournament menu"""
@@ -150,7 +150,7 @@ class TournamentController:
         new_tournament = Tournament(
             name, location, date, rounds_number, tt_list, pl_list, timer, description
         )
-        self.tournament_table.insert(new_tournament.serialized_tournament())
+        self.tournament_table.insert(new_tournament.serialize_tournament())
         self.tournament_menu()
 
     def tt_list(self):
@@ -188,15 +188,15 @@ class TournamentController:
             pcount = 0
             while pcount < 8:
                 players = Player.search_player()
-                self.ttviews.add_player_confirm()
+                self.tournament_view.add_player_confirm()
                 confirmation = input()
                 if confirmation == "y":
                     for player in players:
-                        tournoi.add_player(Player.deserializeplayer(player))
-                        self.menu.tournament_load(tournoi)
+                        tournoi.add_player(Player.deserialize_player(player))
+                        self.tournament.tournament_load(tournoi)
                         pcount += 1
                 else:
-                    self.ttviews.tournament_load(tournoi)
+                    self.tournament_view.tournament_load(tournoi)
                     pcount += 0
             plist = []
             for players in tournoi.tt_players:
