@@ -37,16 +37,12 @@ class PlayerController:
             menu_list[menu]()
 
     def new_player(self):
+
         """ Create a new player"""
-        self.player_view.new_player_name()
         name = self.player_view.new_player_name()
-        self.player_view.new_player_first_name()
         firstname = self.player_view.new_player_first_name()
-        self.player_view.new_player_birthdate()
         birth_date = self.player_view.new_player_birthdate()
-        self.player_view.new_player_gender()
         gender = self.player_view.new_player_gender()
-        self.player_view.new_player_rank()
         rank = self.player_view.new_player_rank()
         new_player = Player(name, firstname, birth_date, gender, rank)
         self.player_table.insert(new_player.serialize_player())
@@ -131,21 +127,13 @@ class TournamentController:
 
     def new_tt(self):
         """ create new tournament object """
-        self.tournament_view.new_tournament_name()
         name = self.tournament_view.new_tournament_name()
-        self.tournament_view.new_tournament_location()
         location = self.tournament_view.new_tournament_location()
-        self.tournament_view.new_tournament_date()
         date = self.tournament_view.new_tournament_date()
         rounds_number = 4
         tt_list = ()
         pl_list = []
-        self.tournament_view.new_tournament_timer()
         timer = self.tournament_view.new_tournament_timer()
-        ttc_check_list = ["Bullet", "Blitz", "Coup rapide"]
-        while timer not in ttc_check_list:
-            timer = self.tournament_view.new_tournament_timer()
-        self.tournament_view.new_tournament_description()
         description = self.tournament_view.new_tournament_description()
         new_tournament = Tournament(
             name, location, date, rounds_number, tt_list, pl_list, timer, description
