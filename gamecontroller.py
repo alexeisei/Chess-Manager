@@ -118,7 +118,7 @@ class GameController:
         )
         if len(tournaments) == 1:
             for tournament in tournaments:
-                tt.append(Tournament.deserialize_tournament(tournament))
+                tt.append(Tournament.deserialize_tournament(self, tournament))
             return tt[0]
         else:
             #self.menu.error_tt_name()
@@ -127,8 +127,8 @@ class GameController:
     def first_round_by_rank(self, tournoi):
         """ sort the player list by rank"""
         p_rank = []
-        for player in tournoi.tt_players:
-            p_rank.append(Player.deserialize_player(player))
+        for player in tournoi.players_list:
+            p_rank.append(Player.deserialize_player(self, player))
         p_rank.sort(key=lambda x: x.rank, reverse=True)
         middle_one = p_rank[:4]
         middle_two = p_rank[4:]
@@ -246,16 +246,16 @@ class GameController:
     def add_players_in_tt(self, tournoi):
         """ add a list of player for the tournament"""
         self.menu.tournament_load(tournoi)
-        while len(tournoi.tt_players) < 8:
+        while len(tournoi.players_list) < 8:
             player = self.playercontroller.search_player()
             self.menu.add_player_confirm()
             confirmation = input()
             if confirmation == "y":
                 if player:
-                    tournoi.add_player(Player.deserialize_player(player))
+                    tournoi.add_player(Player.deserialize_player(self, player))
         plist = []
-        for players in tournoi.tt_players:
-            player = players.serialized_player()
+        for players in tournoi.players_list:
+            player = players.serialize_player()
             plist.append(player)
         self.tournamentcontroller.tournament_table.update(
             {"Tournament_players": plist},
@@ -285,7 +285,7 @@ class GameController:
             p_score = []
             round_list = []
             rcount = 0
-            while rcount < tournoi.rondes:
+            while rcount < tournoi.rounds_number:
                 if rcount < 1:
                     sttime = time.strftime('%H:%M:%S')
                     r1_order, r2_order = self.first_round_by_rank(tournoi)
