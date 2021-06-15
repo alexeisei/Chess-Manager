@@ -62,7 +62,7 @@ class GameController:
 
     def report_player_ranking_order(self):
         """ give the list of players in ranking order """
-        rank_order = self.playercontroller.player_classement_order()
+        rank_order = self.playercontroller.player_ranking_order()
         for rank in rank_order:
             self.menu.player_list(rank)
         self.report_menu()
@@ -109,7 +109,7 @@ class GameController:
         self.report_menu()
 
     def load_tt(self):
-        """ load a tournament since a json """
+        """ load a tournament from a json """
         tt = []
         self.menu.new_tournament_name()
         Tournament_name = input()
@@ -121,7 +121,7 @@ class GameController:
                 tt.append(Tournament.deserialize_tournament(tournament))
             return tt[0]
         else:
-            self.menu.error_tt_name()
+            #self.menu.error_tt_name()
             self.start_menu()
 
     def first_round_by_rank(self, tournoi):
@@ -278,7 +278,7 @@ class GameController:
     def game(self):
         """ Run chess game"""
         tournoi = self.load_tt()
-        if len(tournoi.tt_players) < 8:
+        if len(tournoi.players_list) < 8:
             self.menu.add_player()
             self.add_players_in_tt(tournoi)
         else:
