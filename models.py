@@ -14,12 +14,7 @@ class Player:
         self.rank = rank
         self.score = score
 
-    def __str__(self):
-        """ display player's infos """
-        info = f'name : {self.name} -- rank : {self.rank} -- score : {self.score}'
-        return info.format(self)
-
-    def serialize_player(self):
+    def serialized_player(self):
         """" serialize player's info for TinyDB """
         serialized_player = {
             "Last_name": self.name,
@@ -31,7 +26,7 @@ class Player:
         }
         return serialized_player
 
-    def deserialize_player(cls, player):
+    def deserialize_player(player):
         """ deserialize player table from TinyDB"""
         lastname = player["Last_name"]
         firstname = player["First_name"]
@@ -61,12 +56,7 @@ class Tournament:
         self.timer = timer
         self.description = description
 
-    def __str__(self):
-        """ display tournament's infos """
-        info = f'name : {self.name} -- location : {self.location} -- rounds  : {self.rounds_list} -- timer : {self.timer} -- description : {self.description}'
-        return info.format(self)
-
-    def add_players(self, player):
+    def add_player(self, player):
         """ add a player to the player's list """
         self.players_list.append(player)
 
@@ -88,16 +78,18 @@ class Tournament:
         }
         return serialized_tournament
 
-    def deserialize_tournament(cls, tournament):
+    def deserialize_tournament(tournament):
         """ deserialize tournament table from TinyDB """
         name = tournament["Tournament_name"]
         location = tournament["Tournament_location"]
         tournament_date = tournament["Tournament_date"]
         rounds_number = tournament["Tournament_rounds_number"]
         rounds_list = tournament["Tournament_rounds_list"]
-        players_list = tournament["Tournament_players"]
+        players_list = []
         timer = tournament["Tournament_timer"]
         description = tournament["Tournament_description"]
+        for player in tournament["Tournament_players"]:
+            players_list.append(Player.deserialize_player(player))
         tournament = Tournament(
             name, location, tournament_date, rounds_number, rounds_list, players_list, timer, description
         )
