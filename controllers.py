@@ -29,7 +29,7 @@ class PlayerController:
         menu_list = [
             self.new_player,
             self.edit_player,
-            self.players_list,
+            self.players_list_tt,
         ]
         if menu == 3:
             pass
@@ -39,13 +39,14 @@ class PlayerController:
     def new_player(self):
 
         """ Create a new player"""
-        name = self.player_view.new_player_name()
+        self.player_view.new_player_name()
+        name = input()
         firstname = self.player_view.new_player_first_name()
         birth_date = self.player_view.new_player_birthdate()
         gender = self.player_view.new_player_gender()
         rank = self.player_view.new_player_rank()
         new_player = Player(name, firstname, birth_date, gender, rank)
-        self.player_table.insert(new_player.serialize_player())
+        self.player_table.insert(new_player.serialized_player())
         self.player_menu()
 
     def edit_player(self):
@@ -64,7 +65,7 @@ class PlayerController:
         finally:
             self.player_menu()
 
-    def players_list(self):
+    def players_list_tt(self):
         """ Create a list of all players"""
         players = self.player_table.all()
         for player in players:
@@ -127,7 +128,8 @@ class TournamentController:
 
     def new_tt(self):
         """ create new tournament object """
-        name = self.tournament_view.new_tournament_name()
+        self.tournament_view.new_tournament_name()
+        name = input()
         location = self.tournament_view.new_tournament_location()
         date = self.tournament_view.new_tournament_date()
         rounds_number = 4
@@ -147,24 +149,6 @@ class TournamentController:
         for tournament in tournaments:
             self.tournament_view.tournament_list(tournament)
         self.tournament_menu()
-
-    def load_tt(self):
-        """ load a tournament from a json """
-        tt = []
-        self.tournament_view.new_tournament_name()
-        Tournament_name = input()
-        tournaments = self.tournament_table.search(
-            self.tournamentquery.Tournament_name == f"{Tournament_name}"
-        )
-        if len(tournaments) == 1:
-            for tournament in tournaments:
-                tt.append(Tournament.deserialize_tournament(tournament))
-            for tournoi in tt:
-                self.tournament_view.tournament_load(tournoi)
-            self.add_players_in_tt(tt[0])
-        else:
-            self.tournament_view.error_tt_name()
-            self.tournament_menu()
 
     def add_players_in_tt(self, tournois):
         """ add a list of player for the tournament"""
