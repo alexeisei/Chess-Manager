@@ -32,11 +32,9 @@ class Menu:
     def new_player_name(self):
         """ get the player last name """
         print("Type in player's Last Name: ")
-        name = input()
-        return name
 
     def new_player_first_name(self):
-        """ get the player firt name """
+        """ get the player first name """
         print("Type in player's First Name: ")
         first_name = input()
         return first_name
@@ -71,7 +69,7 @@ class Menu:
         print("---------------------------------")
         print("Last_name:", player["Last_name"])
         print("First_name:", player["First_name"])
-        print("Birth_date:", player["Birth_date"])
+        print("Birthdate:", player["Birthdate"])
         print("Gender:", player["Gender"])
         print("Rank:", player["Rank"])
         print("Score:", player["Score"])
@@ -105,8 +103,7 @@ class Menu:
     def new_tournament_name(self):
         """ get the tournament name"""
         print("Type in Tournament's name: ")
-        name = input()
-        return name
+
 
     def new_tournament_location(self):
         """ get the tournament location"""
@@ -139,27 +136,25 @@ class Menu:
         print("doc_id:", tournament.doc_id)
         print("Tournament_name:", tournament["Tournament_name"])
         print("Tournament_location:", tournament["Tournament_location"])
-        print("Tournament_start_date:", tournament["Tournament_start_date"])
-        print("Tournament_end_date:", tournament["Tournament_end_date"])
-        print("Tournament_rondes:", tournament["Tournament_rondes"])
-        print("Tournament_tournees:", tournament["Tournament_tournees"])
+        print("Tournament_date:", tournament["Tournament_date"])
+        print("Tournament_rounds_number:", tournament["Tournament_rounds_number"])
+        print("Tournament_rounds_list:", tournament["Tournament_rounds_list"])
         print("Tournament_players:", tournament["Tournament_players"])
-        print("Tournament_Tcontrol:", tournament["Tournament_Tcontrol"])
+        print("Tournament_timer:", tournament["Tournament_timer"])
         print("Tournament_description:", tournament["Tournament_description"])
         print("---------------------------------")
 
     def tournament_load(self, tournament):
         """ give the list of the tournament"""
 
-        print("-------- Données du tournoi chargé ---------")
+        print("-------- Loaded Tournament's infos ---------")
         print("Tournament_name:", tournament.name)
         print("Tournament_location:", tournament.location)
-        print("Tournament_start_date:", tournament.start_date)
-        print("Tournament_end_date:", tournament.end_date)
-        print("Tournament_rondes:", tournament.rondes)
-        print("Tournament_tournees:", tournament.tournees_list)
-        print("Tournament_players:", tournament.tt_players)
-        print("Tournament_Tcontrol:", tournament.time_control)
+        print("Tournament_date:", tournament.tournament_date)
+        print("Tournament_rounds_number:", tournament.rounds_number)
+        print("Tournament_rounds_list:", tournament.rounds_list)
+        print("Tournament_players:", tournament.players_list)
+        print("Tournament_timer:", tournament.timer)
         print("Tournament_description:", tournament.description)
         print("--------------------------------------------")
 
@@ -168,7 +163,7 @@ class Menu:
         print("Please add 8 players in your tournament")
 
     def add_player_confirm(self):
-        """ get the tournament name """
+        """ confirm added player """
         print("Confirm player ? y/n ")
 
     # Report Menu
@@ -186,12 +181,12 @@ class Menu:
         print("    4. Ranking order")
         print("5.List of all tournaments")
         print("6.List of all rounds in a tournament")
-        print("7.List of all matchs in a tournament")
+        print("7.List of all matches in a tournament")
         print("8.Return to start menu")
         print("--------------------------------------")
 
     # Round menu
-    
+
     def start_view(self):
         """ start tournament view """
         print("Select tournament time control: 1- Bullet, 2-Blitz, 3-")
@@ -202,11 +197,11 @@ class Menu:
         for i in range(4):
             print(
                 "Player:",
-                p[i].lastname,
+                p[i].last_name,
                 p[i].rank,
                 "vs",
                 "Player:",
-                c[i].lastname,
+                c[i].last_name,
                 c[i].rank,
             )
 
