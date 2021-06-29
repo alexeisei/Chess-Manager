@@ -118,7 +118,7 @@ class GameController:
         )
         if len(tournaments) == 1:
             for tournament in tournaments:
-                tt.append(Tournament.deserialize_tournament(self, tournament))
+                tt.append(Tournament.deserialize_tournament(tournament))
             return tt[0]
         else:
             #self.menu.error_tt_name()
@@ -128,7 +128,7 @@ class GameController:
         """ sort the player list by rank"""
         p_rank = []
         for player in tournoi.players_list:
-            p_rank.append(Player.deserialize_player(self, player))
+            p_rank.append(player.serialized_player())
         p_rank.sort(key=lambda x: x.rank, reverse=True)
         middle_one = p_rank[:4]
         middle_two = p_rank[4:]
@@ -252,10 +252,10 @@ class GameController:
             confirmation = input()
             if confirmation == "y":
                 if player:
-                    tournoi.add_player(Player.deserialize_player(self, player))
+                    tournoi.add_player(Player.deserialize_player(player=player))
         plist = []
         for players in tournoi.players_list:
-            player = players.serialize_player()
+            player = players.serialized_player()
             plist.append(player)
         self.tournamentcontroller.tournament_table.update(
             {"Tournament_players": plist},
