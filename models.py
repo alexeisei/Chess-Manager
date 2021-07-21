@@ -40,7 +40,7 @@ class Player:
 
 class Tournament:
     '''
-    Tournament's class. It allows the creation of a new tournament, based on the attributes of the __init__(self) method
+    Tournament's class. It allows the creation of new tournament, based on the attributes of the __init__(self) method
     The model should also allow to update, read and delete data from the Tournament's table
     It is fed with rounds and players' info
     '''
@@ -153,6 +153,3 @@ class Match:
 
     def draw_match(self):
         self.score += 0.5
-
-
-
