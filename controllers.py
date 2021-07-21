@@ -1,7 +1,5 @@
 from models import Player
 from models import Tournament
-from models import Round
-from models import Match
 from views import Menu
 from tinydb import TinyDB, Query
 
@@ -73,7 +71,7 @@ class PlayerController:
         self.player_menu()
 
     def player_alpha_order(self):
-        """ List of the player in alphabetique order"""
+        """ List of the player in alphabetical order"""
         players = self.player_table.all()
         alpha_order = sorted(players, key=lambda x: x["Last_name"])
         return alpha_order
