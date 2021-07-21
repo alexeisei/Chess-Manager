@@ -77,8 +77,11 @@ class GameController:
     def report_player_alpha_order_tt(self):
         """ give all the player for one tournament in alphabetical order"""
         tt = self.load_tt()
-        players = tt.tt_players
-        alpha_order = sorted(players, key=lambda x: x["Last_name"])
+        players = tt.players_list
+        players_list = []
+        for player in players:
+            players_list.append(player.serialized_player())
+        alpha_order = sorted(players_list, key=lambda x: x["Last_name"])
         for alpha in alpha_order:
             self.menu.player_list(alpha)
         self.report_menu()
@@ -86,8 +89,11 @@ class GameController:
     def report_player_rank_order_tt(self):
         """ give all the player for one tournament in rank order"""
         tt = self.load_tt()
-        players = tt.tt_players
-        rank_order = sorted(players, key=lambda x: x["Rank"], reverse=True)
+        players = tt.players_list
+        players_list = []
+        for player in players:
+            players_list.append(player.serialized_player())
+        rank_order = sorted(players_list, key=lambda x: x["Rank"], reverse=True)
         for rank in rank_order:
             self.menu.player_list(rank)
         self.report_menu()
@@ -129,7 +135,7 @@ class GameController:
         p_rank = []
         for player in tournoi.players_list:
             p_rank.append(player.serialized_player())
-        p_rank.sort(key=lambda x: x.rank, reverse=True)
+        p_rank.sort(key=lambda x: x["Rank"], reverse=True)
         middle_one = p_rank[:4]
         middle_two = p_rank[4:]
         return middle_one, middle_two
@@ -153,29 +159,29 @@ class GameController:
                 while choice not in check_choice:
                     choice = input()
                 if choice == "1":
-                    middle_one[0].score += int(1)
+                    middle_one[0]["Score"] += int(1)
                     match = (
-                        [middle_one[0].lastname, middle_one[0].score],
-                        [middle_two[0].lastname, middle_two[0].score],
+                        [middle_one[0]["Last_name"], middle_one[0]["Score"]],
+                        [middle_two[0]["Last_name"], middle_two[0]["Score"]],
                     )
                     round.append(match)
                     p_score.append(middle_one.pop(0))
                     p_score.append(middle_two.pop(0))
                 if choice == "2":
-                    middle_two[0].score += int(1)
+                    middle_two[0]["Score"] += int(1)
                     match = (
-                        [middle_one[0].lastname, middle_one[0].score],
-                        [middle_two[0].lastname, middle_two[0].score],
+                        [middle_one[0]["Last_name"], middle_one[0]["Score"]],
+                        [middle_two[0]["Last_name"], middle_two[0]["Score"]],
                     )
                     round.append(match)
                     p_score.append(middle_one.pop(0))
                     p_score.append(middle_two.pop(0))
                 if choice == "3":
-                    middle_one[0].score += float(0.5)
-                    middle_two[0].score += float(0.5)
+                    middle_one[0]["Score"] += float(0.5)
+                    middle_two[0]["Score"] += float(0.5)
                     match = (
-                        [middle_one[0].lastname, middle_one[0].score],
-                        [middle_two[0].lastname, middle_two[0].score],
+                        [middle_one[0]["Last_name"], middle_one[0]["Score"]],
+                        [middle_two[0]["Last_name"], middle_two[0]["Score"]],
                     )
                     round.append(match)
                     p_score.append(middle_one.pop(0))
@@ -189,7 +195,7 @@ class GameController:
         """ sort the player list by score """
         new_player_score_list = []
         round = []
-        next_pscore.sort(key=lambda x: (x.score, x.rank), reverse=True)
+        next_pscore.sort(key=lambda x: (x["Score"], x["Rank"]), reverse=True)
         self.menu.other_round(next_pscore)
         self.menu.new_round()
         start = input()
@@ -205,10 +211,10 @@ class GameController:
                 while choice not in check_choice:
                     choice = input()
                 if choice == "1":
-                    next_pscore[0].score += int(1)
+                    next_pscore[0]["Score"] += int(1)
                     match = (
-                        [next_pscore[0].lastname, next_pscore[0].score],
-                        [next_pscore[1].lastname, next_pscore[1].score],
+                        [next_pscore[0]["Last_name"], next_pscore[0]["Score"]],
+                        [next_pscore[1]["Last_name"], next_pscore[1]["Score"]],
                     )
                     round.append(match)
                     new_player_score_list.append(next_pscore[0])
@@ -216,10 +222,10 @@ class GameController:
                     next_pscore.pop(0)
                     next_pscore.pop(0)
                 if choice == "2":
-                    next_pscore[1].score += int(1)
+                    next_pscore[1]["Score"] += int(1)
                     match = (
-                        [next_pscore[0].lastname, next_pscore[0].score],
-                        [next_pscore[1].lastname, next_pscore[1].score],
+                        [next_pscore[0]["Last_name"], next_pscore[0]["Score"]],
+                        [next_pscore[1]["Last_name"], next_pscore[1]["Score"]],
                     )
                     round.append(match)
                     new_player_score_list.append(next_pscore[0])
@@ -227,11 +233,11 @@ class GameController:
                     next_pscore.pop(0)
                     next_pscore.pop(0)
                 if choice == "3":
-                    next_pscore[0].score += float(0.5)
-                    next_pscore[1].score += float(0.5)
+                    next_pscore[0]["Score"] += float(0.5)
+                    next_pscore[1]["Score"] += float(0.5)
                     match = (
-                        [next_pscore[0].lastname, next_pscore[0].score],
-                        [next_pscore[1].lastname, next_pscore[1].score],
+                        [next_pscore[0]["Last_name"], next_pscore[0]["Score"]],
+                        [next_pscore[1]["Last_name"], next_pscore[1]["Score"]],
                     )
                     round.append(match)
                     new_player_score_list.append(next_pscore[0])
@@ -267,10 +273,10 @@ class GameController:
         """ Add round in tournament bdd"""
         rlist = []
         for round in round_list:
-            ronde = round.serialized_rounds()
+            ronde = round.serialize_rounds()
             rlist.append(ronde)
         self.tournamentcontroller.tournament_table.update(
-            {"Tournament_rounds": rlist},
+            {"Tournament_rounds_list": rlist},
             self.tournamentcontroller.tournamentquery.Tournament_name == tournoi.name,
         )
         return rlist
@@ -291,20 +297,20 @@ class GameController:
                     r1_order, r2_order = self.first_round_by_rank(tournoi)
                     scores, round1 = self.scoring_first_round(r1_order, r2_order)
                     endtime = time.strftime('%H:%M:%S')
-                    round_list.append(Round(rcount + 1, round1, sttime, endtime))
+                    round_list.append(Round(rcount + 1, sttime, endtime, round1))
                     for score in scores:
                         p_score.append(score)
                 else:
                     sttime = time.strftime('%H:%M:%S')
                     other_round, round = self.next_round_by_score(p_score)
                     endtime = time.strftime('%H:%M:%S')
-                    round_list.append(Round(rcount + 1, round, sttime, endtime))
+                    round_list.append(Round(rcount + 1, sttime, endtime, round))
                     for score in other_round:
                         p_score.append(score)
                 rcount += 1
             rlist = self.add_round_bdd(round_list, tournoi)
             for round in rlist:
                 tournoi.add_round(round)
-            p_score.sort(key=lambda x: (x.score, x.rank), reverse=True)
+            p_score.sort(key=lambda x: (x["Score"], x["Rank"]), reverse=True)
             self.menu.end_tournament(p_score)
             self.start_menu()
