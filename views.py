@@ -1,4 +1,4 @@
-
+from pprint import pprint
 
 class Menu:
     """
@@ -8,26 +8,26 @@ class Menu:
     # Main menu
     def main_menu(self):
         """ print the Main menu """
-        print("--------- Main Menu ---------")
+        print("********* Main Menu *********")
         print("Welcome, please select your action and press Enter")
         print("1.Manage Tournament")
         print("2.Manage Player")
-        print("3.Start Tournament")
-        print("4.Report")
+        print("3.Start a Tournament")
+        print("4.Reports")
         print("Q.Quit the application")
         print("Choose your action please")
-        print("------------------------------")
+        print("*****************************")
 
     # Player menu
     def menu_player(self):
         """ print the Player menu """
-        print("--------- Player Menu ---------")
+        print("********* Player Menu *********")
         print("Please select your action and press Enter")
         print("1.New player")
         print("2.Edit player's rank")
         print("3.Players' list")
         print("4.Return to Main menu")
-        print("-------------------------------")
+        print("*******************************")
 
     def new_player_name(self):
         """ get the player last name """
@@ -66,19 +66,19 @@ class Menu:
     def player_list(self, player):
         """ give the list of the players """
 
-        print("---------------------------------")
+        print("********************************")
         print("Last_name:", player["Last_name"])
         print("First_name:", player["First_name"])
         print("Birthdate:", player["Birthdate"])
         print("Gender:", player["Gender"])
         print("Rank:", player["Rank"])
         print("Score:", player["Score"])
-        print("---------------------------------")
+        print("********************************")
 
     def player_search(self, player):
         """ show the searched players """
 
-        print("-------Your research result------------")
+        print("******** Your research result ********")
         print("doc_id:", player.doc_id)
         print("Last_name:", player["Last_name"])
         print("First_name:", player["First_name"])
@@ -86,24 +86,21 @@ class Menu:
         print("Gender:", player["Gender"])
         print("Rank:", player["Rank"])
         print("Score:", player["Score"])
-        print("---------------------------------------")
+        print("**************************************")
 
     # Tournament Menu
     def menu_tournament(self):
         """ print the Tournament menu """
-        print("----------- Tournament Menu -----------")
+        print("********** Tournament Menu **********")
         print("Please select your action and press Enter")
         print("1.Create a Tournament")
-        print("2.Edit a Tournament")
-        print("3.List of Tournaments")
-        print("4.Add a player in Tournament")
-        print("5.Return to Main menu")
-        print("---------------------------------------")
+        print("2.List of Tournaments")
+        print("3.Return to Main menu")
+        print("*************************************")
 
     def new_tournament_name(self):
         """ get the tournament name"""
         print("Type in Tournament's name: ")
-
 
     def new_tournament_location(self):
         """ get the tournament location"""
@@ -132,7 +129,7 @@ class Menu:
     def tournament_list(self, tournament):
         """ give the list of the tournaments"""
 
-        print("------- Tounament's list -------")
+        print("******** Tounament's list *********")
         print("doc_id:", tournament.doc_id)
         print("Tournament_name:", tournament["Tournament_name"])
         print("Tournament_location:", tournament["Tournament_location"])
@@ -142,12 +139,12 @@ class Menu:
         print("Tournament_players:", tournament["Tournament_players"])
         print("Tournament_timer:", tournament["Tournament_timer"])
         print("Tournament_description:", tournament["Tournament_description"])
-        print("---------------------------------")
+        print("************************************")
 
     def tournament_load(self, tournament):
         """ give the list of the tournament"""
 
-        print("-------- Loaded Tournament's infos ---------")
+        print("********* Loaded Tournament's infos *********")
         print("Tournament_name:", tournament.name)
         print("Tournament_location:", tournament.location)
         print("Tournament_date:", tournament.tournament_date)
@@ -156,10 +153,10 @@ class Menu:
         print("Tournament_players:", tournament.players_list)
         print("Tournament_timer:", tournament.timer)
         print("Tournament_description:", tournament.description)
-        print("--------------------------------------------")
+        print("*********************************************")
 
     def add_player(self):
-        """ get the tournament name"""
+        """ add players to tournament """
         print("Please add 8 players in your tournament")
 
     def add_player_confirm(self):
@@ -171,8 +168,8 @@ class Menu:
     def menu_report(self):
         """ print the report menu """
 
-        print("------------ Report Menu -------------")
-        print("welcome, please select your action and press Enter")
+        print("*********** Report Menu ***********")
+        print("Welcome, please select your action and press Enter")
         print("List of all players:")
         print("    1. Alphabetical order")
         print("    2. Ranking order")
@@ -183,7 +180,7 @@ class Menu:
         print("6.List of all rounds in a tournament")
         print("7.List of all matches in a tournament")
         print("8.Return to start menu")
-        print("--------------------------------------")
+        print("***********************************")
 
     # Round menu
 
@@ -193,23 +190,23 @@ class Menu:
 
     def f_round(self, p, c):
         """ shows the player vs player view"""
-        print("----- Round players ranking-----")
+        print("******* Round players ranking *******")
         for i in range(4):
             print(
                 "Player:",
-                p[i].last_name,
-                p[i].rank,
+                p[i]["Last_name"],
+                p[i]["Rank"],
                 "vs",
                 "Player:",
-                c[i].last_name,
-                c[i].rank,
+                c[i]["Last_name"],
+                c[i]["Rank"],
             )
 
     def first_round(self, p, c):
         """ view to set the winner"""
-        print("--------- Choose the winner or draw -----------")
+        print("********* Choose the winner or draw *********")
         for i in range(4):
-            print("Winner:", p[i].lastname, "[1]", "or", c[i].lastname, "[2]")
+            print("Winner:", p[i]["Last_name"], "[1]", "or", c[i]["Last_name"], "[2]")
             print("Draw: [3)")
         print("The round is over, enter results:")
 
@@ -219,29 +216,29 @@ class Menu:
 
     def other_round(self, player):
         """ view of the player list for the score management """
-        print("----- Round players ranking-----")
+        print("******* Round players ranking *******")
         for i in range(0, len(player), 2):
             print(
                 "Player:",
-                player[i].lastname,
-                player[i].score,
+                player[i]["Last_name"],
+                player[i]["Score"],
                 "vs",
                 "Player:",
-                player[i + 1].lastname,
-                player[i + 1].score,
+                player[i + 1]["Last_name"],
+                player[i + 1]["Score"],
             )
-        print("------------------------------------")
+        print("*************************************")
 
     def oth_round(self, player):
-        """ view for choose the winner """
-        print("--------- Choose the winner or draw -----------")
+        """ view to choose the winner """
+        print("********* Choose the winner or draw *********")
         for i in range(0, len(player), 2):
             print(
                 "Winner:",
-                player[i].lastname,
+                player[i]["Last_name"],
                 "[1]",
                 "or",
-                player[i + 1].lastname,
+                player[i + 1]["Last_name"],
                 "[2]",
             )
             print("Draw: [3)")
@@ -249,28 +246,29 @@ class Menu:
 
     def round_view(self, rounds):
         """ view all rounds for a tournament"""
-        print("---------------------------------")
-        print("Round:", rounds["Round"])
-        print("Start_time:", rounds["Start_time"])
+        print("**********************************")
+        print("Round:", rounds["Round_name"])
+        print("Start_time:")
+        pprint(rounds["Start_time"])
         print("End_time:", rounds["End_time"])
         print("Matchs:", rounds["Matchs"])
-        print("---------------------------------")
+        print("**********************************")
 
     def match_view(self, match):
-        """ viaw all matches of the tournament """
+        """ view all matches of the tournament """
         print("Matchs:", match["Matchs"])
 
     def end_tournament(self, player):
         """ view whit the players results of the tournament"""
-        print("----- End of the tournament - players ranking-----")
+        print("******* End of the tournament - players ranking *******")
         for i in range(0, len(player), 2):
             print(
                 "Player:",
-                player[i].lastname,
-                player[i].score,
+                player[i]["Last_name"],
+                player[i]["Score"],
                 "vs",
                 "Player:",
-                player[i + 1].lastname,
-                player[i + 1].score,
+                player[i + 1]["Last_name"],
+                player[i + 1]["Score"],
             )
-        print("-------------------------------------------------------")
+        print("*******************************************************")
