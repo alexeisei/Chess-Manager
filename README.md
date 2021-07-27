@@ -36,7 +36,6 @@ Or for Windows :
 ```
 env\Scripts\activate
 ```
-
 ```
 pip install -r requirements.txt
 ```
