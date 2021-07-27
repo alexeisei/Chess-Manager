@@ -18,3 +18,7 @@ The application generates automatically the match making by itself.
 The user enters the winners at the end of each round (4 matches each). 
 The application will then give the results of the tournament at the end of the 4th round.
 
+
+## To use the application
+
+1) Download the Zip files from this page and unzip them in the directory of your choice
