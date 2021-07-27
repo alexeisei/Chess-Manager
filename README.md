@@ -23,12 +23,11 @@ The application will then give the results of the tournament at the end of the 4
 
 1) Download the Zip files from this page and unzip them in the directory of your choice
 2) Launch the command prompt on your system and go to the directory you unzipped the files
-3) type in the following commands to create a virtual environement :
-
+3) Type in the following commands to create a virtual environement :
 ```
 python -m venv env
 ```
-For Linux or Mac
+For Linux or Mac :
 ```
 -env\Scripts\activate.bat
 ```
@@ -36,13 +35,15 @@ Or for Windows :
 ```
 env\Scripts\activate
 ```
+Then for all sytems :
 ```
 pip install -r requirements.txt
 ```
-
-
-
-
-To generate flake8 reports :
-
+4) To launch the application, type in :
+```
+python chess.py
+```
+5) To generate flake8 reports :
+```
 flake8 --max-line-length=119 --format=html --htmldir=html-report --exclude=__pycache__,env,venv
+```
