@@ -207,7 +207,7 @@ class Menu:
         print("********* Choose the winner or draw *********")
         for i in range(4):
             print("Winner:", p[i]["Last_name"], "[1]", "or", c[i]["Last_name"], "[2]")
-            print("Draw: [3)")
+            print("Draw: [3]")
         print("The round is over, enter results:")
 
     def new_round(self):
@@ -241,7 +241,7 @@ class Menu:
                 player[i + 1]["Last_name"],
                 "[2]",
             )
-            print("Draw: [3)")
+            print("Draw: [3]")
         print("The round is finish, enter results:")
 
     def round_view(self, rounds):
@@ -251,12 +251,12 @@ class Menu:
         print("Start_time:")
         pprint(rounds["Start_time"])
         print("End_time:", rounds["End_time"])
-        print("Matchs:", rounds["Matchs"])
+        print("Matches:", rounds["Matches"])
         print("**********************************")
 
     def match_view(self, match):
         """ view all matches of the tournament """
-        print("Matchs:", match["Matchs"])
+        print("Matches:", match["Matches"])
 
     def end_tournament(self, player):
         """ view whit the players results of the tournament"""
