@@ -127,7 +127,6 @@ class GameController:
                 tt.append(Tournament.deserialize_tournament(tournament))
             return tt[0]
         else:
-            #self.menu.error_tt_name()
             self.start_menu()
 
     def first_round_by_rank(self, tournoi):
