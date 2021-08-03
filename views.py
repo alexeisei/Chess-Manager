@@ -1,5 +1,6 @@
 from pprint import pprint
 
+
 class Menu:
     """
     This class sets the "views" of the chess application, the user will interact with
