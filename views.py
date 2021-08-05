@@ -89,6 +89,14 @@ class Menu:
         print("Score:", player["Score"])
         print("**************************************")
 
+    def change_player_rank(self):
+        """ change the player's rank """
+        print("Enter the new player Rank : ")
+
+    def error_player_rank(self):
+        """ error message player's rank """
+        print("Please, enter a correct rank number")
+
     # Tournament Menu
     def menu_tournament(self):
         """ print the Tournament menu """
