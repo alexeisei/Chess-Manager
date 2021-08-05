@@ -58,7 +58,7 @@ class PlayerController:
             self.player_view.error_player_rank()
         else:
             self.player_table.update(
-                {"Elo": input_rank}, self.playerquery.Last_name == f"{input_player}"
+                {"Rank": input_rank}, self.playerquery.Last_name == f"{input_player}"
             )
         finally:
             self.player_menu()
