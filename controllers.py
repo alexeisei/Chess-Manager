@@ -147,33 +147,3 @@ class TournamentController:
         for tournament in tournaments:
             self.tournament_view.tournament_list(tournament)
         self.tournament_menu()
-
-    def add_players_in_tt(self, tournois):
-        """ add a list of player for the tournament"""
-        tournoi = tournois
-        if len(tournoi.tt_players) == 8:
-            self.tournament_view.tt_adding_player()
-            self.tournament_menu()
-        else:
-            pcount = 0
-            while pcount < 8:
-                players = Player.search_player()
-                self.tournament_view.add_player_confirm()
-                confirmation = input()
-                if confirmation == "y":
-                    for player in players:
-                        tournoi.add_player(Player.deserialize_player(player))
-                        self.tournament.tournament_load(tournoi)
-                        pcount += 1
-                else:
-                    self.tournament_view.tournament_load(tournoi)
-                    pcount += 0
-            plist = []
-            for players in tournoi.tt_players:
-                player = players.serialized_player()
-                plist.append(player)
-            self.tournament_table.update(
-                {"Tournament_players": plist},
-                self.tournamentquery.Tournament_name == tournoi.name,
-            )
-            self.tournament_menu()
